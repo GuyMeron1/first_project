@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="./css/weather.css">
+</head>
+<body>
+    <div class="navigations">
+        <button onclick="window.location.href='http://localhost:6800/'" class="navigation-button">Home</button>
+        <button onclick="window.location.href='http://localhost:6800/addStudent'" class="navigation-button">Add Student</button>
+        <button onclick="window.location.href='http://localhost:6800/addTeacher'" class="navigation-button">Add Teacher</button>
+        <button onclick="window.location.href='http://localhost:6800/login'" class="navigation-button">Login Student</button>
+        <button onclick="window.location.href='http://localhost:6800/reg'" class="navigation-button">Register</button>
+        <button onclick="window.location.href='http://localhost:6800/weather'" class="navigation-button">Weather</button>
+    </div>
+    
+    <div class="container">
+        <h2>Weather App</h2>
+        <label for="city_name">City Name</label>
+        <input type="text" id="city_name" placeholder="Enter city name">
+        <button type="button" onclick="city_name_click()">Enter City</button>
+        <h6 id="citycode"></h6>
+    </div>
+    <div class="daily_weather"></div>
+    <div class="f_d_weather"></div>
+    <script src="./js/weather.js"></script>
+</body>
+</html>

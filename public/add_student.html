@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="./css/add_student.css">
+</head>
+<body>
+    <div class="navigations">
+        <button onclick="window.location.href='http://localhost:6800/'" class="navigation-button">Home</button>
+        <button onclick="window.location.href='http://localhost:6800/addStudent'" class="navigation-button">Add Student</button>
+        <button onclick="window.location.href='http://localhost:6800/addTeacher'" class="navigation-button">Add Teacher</button>
+        <button onclick="window.location.href='http://localhost:6800/login'" class="navigation-button">Login Student</button>
+        <button onclick="window.location.href='http://localhost:6800/reg'" class="navigation-button">Register</button>
+        <button onclick="window.location.href='http://localhost:6800/weather'" class="navigation-button">Weather</button>
+    </div>
+    
+
+    <div class="container">
+        <h2>Add student to DataBase</h2>
+        <div class="name">
+            <label for="name">Enter Student's Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="age">
+            <label for="age">Enter Student's Age</label>
+            <input type="number" name="age" id="age">
+        </div>
+        <div class="grades">
+            <label for="subjects">Enter Student's Subjects and Grades</label>
+            <input type="text" name="grades" id="grades">
+        </div>
+        <div class="password">
+            <label for="password">Enter Student's Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="button">
+            <button type="button" onclick="add_Student_func()">Add Student</button>
+        </div>
+    </div>
+    <script src="./js/add_Student.js"></script>
+</body>
+</html>

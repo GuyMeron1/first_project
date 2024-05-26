@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./css/register.css">
+
+</head>
+<body>
+    <div class="navigations">
+        <button onclick="window.location.href='http://localhost:6800/'" class="navigation-button">Home</button>
+        <button onclick="window.location.href='http://localhost:6800/addStudent'" class="navigation-button">Add Student</button>
+        <button onclick="window.location.href='http://localhost:6800/addTeacher'" class="navigation-button">Add Teacher</button>
+        <button onclick="window.location.href='http://localhost:6800/login'" class="navigation-button">Login Student</button>
+        <button onclick="window.location.href='http://localhost:6800/reg'" class="navigation-button">Register</button>
+        <button onclick="window.location.href='http://localhost:6800/weather'" class="navigation-button">Weather</button>
+    </div>
+    
+    <div class = "container">
+        <h2>Registration Form</h2>
+        <form method = "post" action="/register">
+            <div class="name">
+                <label for="UserName">User Name: </label>
+                <input type="text" name="UserName" id="UserName"/>
+            </div>
+            <div class="email">
+                <label for="Email">Email: </label>
+                <input type="text" name="Email" id="Email"/>
+            </div>
+            <div class="email-options">
+                <button type="button" class="email-option">@</button>
+                <button type="button" class="email-option">gmail</button>
+                <button type="button" class="email-option">.com</button>
+            </div>
+            <div class="password">
+                <label for="Password">Password: </label>
+                <input type="password" name="Password" id="Password"/>
+            </div>
+            <div class="main_button">
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

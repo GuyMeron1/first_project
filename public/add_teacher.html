@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="./css/add_teacher.css">
+</head>
+
+<body>
+    <div class="navigations">
+        <button onclick="window.location.href='http://localhost:6800/'" class="navigation-button">Home</button>
+        <button onclick="window.location.href='http://localhost:6800/addStudent'" class="navigation-button">Add Student</button>
+        <button onclick="window.location.href='http://localhost:6800/addTeacher'" class="navigation-button">Add Teacher</button>
+        <button onclick="window.location.href='http://localhost:6800/login'" class="navigation-button">Login Student</button>
+        <button onclick="window.location.href='http://localhost:6800/reg'" class="navigation-button">Register</button>
+        <button onclick="window.location.href='http://localhost:6800/weather'" class="navigation-button">Weather</button>
+    </div>
+    
+
+    <div class="container">
+        <h2>Add teacher to DataBase</h2>
+        <div class="name">
+            <label for="name">Enter Teacher's Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="age">
+            <label for="age">Enter Teacher's Age</label>
+            <input type="number" name="age" id="age">
+        </div>
+        <div class="subjects">
+            <label for="subjects">Enter Teacher's Subjects</label>
+            <input type="text" name="subjects" id="subjects">
+        </div>
+        <div class="email">
+            <label for="email">Enter Teacher's Email</label>
+            <input type="text" name="email" id="email">
+            <div class="email-options">
+                <button type="email-option" class="email-option">@</button>
+                <button type="email-option" class="email-option">gmail</button>
+                <button type="email-option" class="email-option">.com</button>
+            </div>
+        </div>
+        <div class="main-button">
+            <button type="button" class="main-button-btn" onclick="add_Teacher_func()">Add Teacher</button>
+        </div>
+    </div>
+
+    <script src="./js/add_Teacher.js"></script>
+</body>
+
+</html>
