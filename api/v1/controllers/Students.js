@@ -2,17 +2,6 @@ const mongoose=require('mongoose');
 const Students_Model = require('../models/Students');
 const bcrypt = require('bcrypt');
 
-function GetRandomString(length){
-    let str="";
-    const chars="abcdefghijklmnopqrstuvwxyz0123456789ABCDEF!@#%&";
-    let index;
-    for(let i=0;i<length;i++){
-        index=Math.floor(Math.random() * chars.length); // ceil --- > floor 
-        str+=chars[index];
-    }
-    return str;
-}
-
 module.exports = {
 
     Add_Student : async (req,res) => {

@@ -16,9 +16,6 @@ body {
 
 .container h2 {
     text-align: center;
-}
-
-.container .city_name {
     margin-bottom: 20px;
 }
 
@@ -27,14 +24,22 @@ body {
     margin-bottom: 5px;
     font-weight: bold;
 }
+.container label {
+    display: block;
+    margin-bottom: 10px; /* Adjust margin for better spacing */
+    font-weight: bold;
+    font-size: 16px; /* Increase font size for better visibility */
+    color: #333; /* Adjust color for better contrast */
+}
+
 
 .container input[type="text"] {
-    width: calc(100% - 22px);
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .container button {
@@ -45,9 +50,30 @@ body {
     border-radius: 3px;
     cursor: pointer;
     display: block;
-    margin: 20px auto 0;
+    width: 100%;
+    text-align: center;
 }
 
 .container button:hover {
-    background-color: #07294e;
+    background-color: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.result a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.result {
+    margin-top: 20px;
+    word-wrap: break-word; /* Ensure long words break and wrap onto the next line */
 }

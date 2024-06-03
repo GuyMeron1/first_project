@@ -21,6 +21,9 @@ app.use('/teachers', Teachers_Router);
 const Students_Router = require('./api/v1/routes/Students');
 app.use('/students', Students_Router);
 
+const Bitly_Router = require('./api/v1/routes/Bitly');
+app.use('/bitly', Bitly_Router);
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
 })
@@ -43,6 +46,27 @@ app.get('/login', (req, res) => {
 
 app.get('/weather', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'weather.html'))
+});
+
+app.get('/bitly_page',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public','bitly.html'));
+});
+
+
+app.get('/:shortLink', async (req, res) => {
+    try {
+        const Bitly_Model = require('./api/v1/models/Bitly');
+        const shortLink = req.params.shortLink;
+        const link = await Bitly_Model.findOne({ ShortLink: shortLink });
+
+        if (link) {
+            res.redirect(link.LongLink);
+        } else {
+            res.status(404).send('Link not found');
+        }
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
 });
 
 app.post('/register', (req, res) => {

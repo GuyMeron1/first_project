@@ -5,7 +5,8 @@ function createNavigationButtons() {
         { text: 'Add Teacher', url: '/addTeacher' },
         { text: 'Login Student', url: '/login' },
         { text: 'Register', url: '/reg' },
-        { text: 'Weather', url: '/weather' }
+        { text: 'Weather', url: '/weather' },
+        { text: 'Bitly', url: '/bitly_page' }
     ];
 
     const container = document.createElement('div');
