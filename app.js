@@ -56,6 +56,9 @@ app.get('/get_all_students',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','get_all_students.html'));
 });
 
+app.get('/game',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public','game.html'));
+});
 
 app.get('/:shortLink', async (req, res) => {
     try {

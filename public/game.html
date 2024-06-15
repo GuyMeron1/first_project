@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulls and Cows Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .color {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #333;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .color:hover {
+            transform: scale(1.1);
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border: 2px solid #333;
+            display: inline-block;
+        }
+
+        .result-box {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: 2px solid #333;
+            display: inline-block;
+        }
+
+        .memory-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .memory-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .green {
+            background-color: lightgreen;
+        }
+
+        .yellow {
+            background-color: lightyellow;
+        }
+
+        .red {
+            background-color: lightcoral;
+        }
+
+        #submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #restart-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #restart-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Bulls and Cows Game</h1>
+        <p>Select colors from the palette and assign them to 4 boxes:</p>
+        <div class="color-palette">
+            <div class="color" style="background-color: red;" onclick="selectColor('red')"></div>
+            <div class="color" style="background-color: blue;" onclick="selectColor('blue')"></div>
+            <div class="color" style="background-color: green;" onclick="selectColor('green')"></div>
+            <div class="color" style="background-color: yellow;" onclick="selectColor('yellow')"></div>
+            <div class="color" style="background-color: orange;" onclick="selectColor('orange')"></div>
+            <div class="color" style="background-color: purple;" onclick="selectColor('purple')"></div>
+            <div class="color" style="background-color: cyan;" onclick="selectColor('cyan')"></div>
+            <div class="color" style="background-color: magenta;" onclick="selectColor('magenta')"></div>
+            <div class="color" style="background-color: brown;" onclick="selectColor('brown')"></div>
+            <div class="color" style="background-color: black;" onclick="selectColor('black')"></div>
+        </div>
+        <div class="boxes-container">
+            <div class="box" id="box1" onclick="assignColor(1)"></div>
+            <div class="box" id="box2" onclick="assignColor(2)"></div>
+            <div class="box" id="box3" onclick="assignColor(3)"></div>
+            <div class="box" id="box4" onclick="assignColor(4)"></div>
+        </div>
+        <button id="submit-btn" onclick="checkGuess()">Submit Guess</button>
+        <button id="restart-btn" onclick="resetGame()">Restart Game</button>
+        <div id="memory" class="memory-container"></div>
+    </div>
+
+    <script>
+        let board = generateRandomBoard();
+        let selectedColors = [];
+
+        function generateRandomBoard() {
+            let board = [];
+            while (board.length < 4) {
+                let randomNumber = Math.floor(Math.random() * 10);
+                if (!board.includes(randomNumber)) {
+                    board.push(randomNumber);
+                }
+            }
+            return board;
+        }
+
+        function selectColor(color) {
+            selectedColors = [color]; // Replace the array with a single color
+        }
+
+        function assignColor(boxIndex) {
+            if (selectedColors.length === 0) {
+                return;
+            }
+            let color = selectedColors[0]; // Use the first color in the array
+            document.getElementById(`box${boxIndex}`).style.backgroundColor = color;
+        }
+
+        function checkGuess() {
+            for (let i = 1; i <= 4; i++) {
+                if (!document.getElementById(`box${i}`).style.backgroundColor) {
+                    return;
+                }
+            }
+
+            let guessColors = [];
+            for (let i = 1; i <= 4; i++) {
+                guessColors.push(getColorName(document.getElementById(`box${i}`).style.backgroundColor));
+            }
+
+            let results = evaluateGuess(guessColors);
+            displayResults(guessColors, results);
+
+            if (results.every(result => result === 3)) {
+                document.getElementById('restart-btn').style.display = 'block';
+            } else {
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`box${i}`).style.backgroundColor = 'white';
+                }
+            }
+        }
+
+        function evaluateGuess(guessColors) {
+            let results = [];
+            for (let i = 0; i < 4; i++) {
+                if (board[i] === getColorIndex(guessColors[i])) {
+                    results.push(3);
+                } else if (board.includes(getColorIndex(guessColors[i]))) {
+                    results.push(2);
+                } else {
+                    results.push(1);
+                }
+            }
+            return results;
+        }
+
+        function displayResults(guessColors, results) {
+            let memoryContainer = document.getElementById('memory');
+            let memoryRow = document.createElement('div');
+            memoryRow.classList.add('memory-row');
+
+            for (let i = 0; i < 4; i++) {
+                let guessBox = document.createElement('div');
+                guessBox.classList.add('box');
+                guessBox.style.backgroundColor = guessColors[i];
+                memoryRow.appendChild(guessBox);
+            }
+
+            for (let i = 0; i < 4; i++) {
+                let resultBox = document.createElement('div');
+                resultBox.classList.add('result-box');
+                switch (results[i]) {
+                    case 1:
+                        resultBox.classList.add('red');
+                        break;
+                    case 2:
+                        resultBox.classList.add('yellow');
+                        break;
+                    case 3:
+                        resultBox.classList.add('green');
+                        break;
+                }
+                memoryRow.appendChild(resultBox);
+            }
+
+            memoryContainer.appendChild(memoryRow);
+        }
+
+        function resetGame() {
+            board = generateRandomBoard();
+            selectedColors = [];
+            document.getElementById('memory').innerHTML = '';
+            document.getElementById('restart-btn').style.display = 'none';
+
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`box${i}`).style.backgroundColor = 'white';
+            }
+        }
+
+        function getColorName(color) {
+            switch (color) {
+                case 'red': return 'red';
+                case 'blue': return 'blue';
+                case 'green': return 'green';
+                case 'yellow': return 'yellow';
+                case 'orange': return 'orange';
+                case 'purple': return 'purple';
+                case 'cyan': return 'cyan';
+                case 'magenta': return 'magenta';
+                case 'brown': return 'brown';
+                case 'black': return 'black';
+                default: return '';
+            }
+        }
+
+        function getColorIndex(colorName) {
+            switch (colorName) {
+                case 'red': return 0;
+                case 'blue': return 1;
+                case 'green': return 2;
+                case 'yellow': return 3;
+                case 'orange': return 4;
+                case 'purple': return 5;
+                case 'cyan': return 6;
+                case 'magenta': return 7;
+                case 'brown': return 8;
+                case 'black': return 9;
+                default: return -1;
+            }
+        }
+    </script>
+</body>
+
+</html>
