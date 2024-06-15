@@ -52,6 +52,10 @@ app.get('/bitly_page',(req,res)=>{
     res.sendFile(path.join(__dirname,'public','bitly.html'));
 });
 
+app.get('/get_all_students',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public','get_all_students.html'));
+});
+
 
 app.get('/:shortLink', async (req, res) => {
     try {

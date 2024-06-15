@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const Students_Model = require('../models/Students');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 
@@ -26,20 +27,30 @@ module.exports = {
     Student_Login: async (req, res) => {
         const { Name, Password } = req.body;
         const student = await Students_Model.findOne({ Name });
-        console.log(student);
-        console.log(Password);
         if (!student) {
             return res.status(404).json({ message: "Student not found" });
         }
+
         const passwordMatch = await bcrypt.compare(Password, student.Password);
-        const salt = await bcrypt.genSalt(12);
-        const hashedPassword = await bcrypt.hash(Password, salt);
-        console.log(hashedPassword);
-        console.log(student.Password);
+
         if (passwordMatch) {
-            return res.status(200).json({ message: "Login successful" });
+            const user = { name: student.Name };
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            return res.status(200).json({ message: "Login successful", accessToken });
         } else {
             return res.status(401).json({ message: "Invalid credentials" });
         }
     },
+    getallStu: async (req, res) => {
+        try {
+            const students = await Students_Model.find();
+            if (students.length > 0) {
+                return res.status(200).json(students);
+            } else {
+                return res.status(404).json({ message: "No students found" });
+            }
+        } catch (error) {
+            return res.status(500).json({ message: "Server Error occurred" });
+        }
+    }
 }
