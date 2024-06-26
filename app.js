@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 
 const apiWeather = require('./apiWeather');
 
-//const uri = "";
 const uri=process.env.MONGO_STR;
 mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("mongo db connected ")});
 
@@ -23,6 +22,9 @@ app.use('/students', Students_Router);
 
 const Bitly_Router = require('./api/v1/routes/Bitly');
 app.use('/bitly', Bitly_Router);
+
+const Zoo_Router = require('./api/v1/routes/Zoo_Emp');
+app.use('/zoo', Zoo_Router);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
